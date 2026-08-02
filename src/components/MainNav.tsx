@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const SECTIONS = [
   { id: "sobre", label: "Sobre mim" },
@@ -10,11 +11,23 @@ const SECTIONS = [
 ];
 
 export function MainNav() {
+  const pathname = usePathname();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
 
   const navRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+
+  // On the home page, scroll to the section directly instead of letting Next
+  // do a same-page hash navigation (which needed two clicks and duplicated the
+  // hash in the URL). On other pages, let the Link navigate to /#id normally.
+  const handleClick = (e: React.MouseEvent, id: string) => {
+    if (pathname !== "/") return;
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    el.scrollIntoView({ behavior: "smooth" });
+  };
 
   // Scroll-spy: mark the section currently near the top of the viewport.
   useEffect(() => {
@@ -86,6 +99,7 @@ export function MainNav() {
         <Link
           key={s.id}
           href={`/#${s.id}`}
+          onClick={(e) => handleClick(e, s.id)}
           ref={(el) => {
             linkRefs.current[s.id] = el;
           }}
