@@ -1,19 +1,26 @@
 import Link from "next/link";
 import { site } from "@/config/site";
 
-// TODO: substituir pelos textos reais das suas áreas de intervenção.
 const areas = [
   {
-    title: "Ansiedade e stress",
-    text: "Estratégias para lidar com a preocupação excessiva, o cansaço e a tensão do dia a dia.",
+    title: "Psicologia Clínica",
+    text: "Acompanhamento psicológico em diferentes fases da vida, com escuta, respeito e colaboração.",
   },
   {
-    title: "Depressão e humor",
-    text: "Apoio para recuperar energia, sentido e prazer nas atividades do quotidiano.",
+    title: "Psicologia do Desporto",
+    text: "Apoio a atletas na gestão emocional, na motivação e no desempenho sob pressão.",
   },
   {
-    title: "Relações e vida pessoal",
-    text: "Espaço para refletir sobre relações, transições de vida e autoconhecimento.",
+    title: "Intervenção no Luto",
+    text: "Um espaço para viver e integrar a perda, ao seu próprio ritmo e sem julgamentos.",
+  },
+  {
+    title: "PHDA",
+    text: "Avaliação e intervenção na Perturbação de Hiperatividade e Défice de Atenção, na infância e na idade adulta.",
+  },
+  {
+    title: "Perturbação do Espetro do Autismo",
+    text: "Avaliação e apoio a pessoas no espetro do autismo e às suas famílias.",
   },
 ];
 
@@ -81,20 +88,32 @@ export default function HomePage() {
         <div className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
           <h2 className="font-serif text-3xl text-ink">Sobre mim</h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted">
-            {/* TODO: substituir pela sua biografia real. */}
             <p>
-              Sou {site.practitionerName}, {site.role.toLowerCase()}. Acredito
-              que cada pessoa é única e que a terapia é um espaço de escuta,
-              respeito e colaboração.
+              Sou {site.practitionerName} e concluí o Mestrado em Psicologia
+              Clínica na Universidade Lusíada de Lisboa. Interesso-me
+              particularmente por psicologia clínica, intervenção em crise,
+              psicologia do desporto e saúde mental, e procuro dedicar a minha
+              carreira a apoiar pessoas em contextos de vulnerabilidade e
+              exigência — promovendo resiliência, bem-estar psicológico e
+              estratégias de adaptação eficazes.
             </p>
             <p>
-              Ao longo do meu percurso, tenho acompanhado pessoas em diferentes
-              fases da vida, ajudando-as a compreender-se melhor e a desenvolver
-              recursos para lidar com as suas dificuldades.
+              Ao longo de mais de 15 anos como atleta de alta competição em
+              natação, desenvolvi disciplina, resiliência, gestão emocional e
+              desempenho sob pressão. São competências que trago para a prática
+              psicológica e para o acompanhamento em contextos académicos e
+              profissionais.
             </p>
             <p>
-              Descreva aqui a sua formação, experiência e a abordagem que
-              utiliza no seu trabalho.
+              Tenho experiência em avaliação psicológica, entrevistas clínicas,
+              elaboração de relatórios e investigação científica, e participo
+              regularmente em workshops e congressos para garantir o
+              desenvolvimento contínuo das minhas competências clínicas.
+            </p>
+            <p>
+              Comprometo-me a unir rigor académico, experiência prática e
+              empatia, contribuindo para o crescimento e o bem-estar de cada
+              pessoa que acompanho.
             </p>
           </div>
         </div>
@@ -103,7 +122,7 @@ export default function HomePage() {
       {/* Áreas de intervenção */}
       <section className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
         <h2 className="font-serif text-3xl text-ink">Áreas de intervenção</h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {areas.map((area) => (
             <div
               key={area.title}

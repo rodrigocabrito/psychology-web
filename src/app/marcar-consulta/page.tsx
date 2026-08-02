@@ -28,14 +28,19 @@ export default function MarcarConsultaPage() {
           className="text-sage-dark underline underline-offset-2"
         >
           {site.email}
-        </a>{" "}
-        ou{" "}
-        <a
-          href={`tel:${site.phone.replace(/\s/g, "")}`}
-          className="text-sage-dark underline underline-offset-2"
-        >
-          {site.phone}
         </a>
+        {site.phone && (
+          <>
+            {" "}
+            ou{" "}
+            <a
+              href={`tel:${site.phone.replace(/\s/g, "")}`}
+              className="text-sage-dark underline underline-offset-2"
+            >
+              {site.phone}
+            </a>
+          </>
+        )}
         .
       </p>
     </section>

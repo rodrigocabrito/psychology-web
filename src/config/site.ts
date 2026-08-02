@@ -1,15 +1,14 @@
 /**
  * Central place for the basic site content.
  * Edit these values to update the name, contacts, etc. across the whole site.
- * TODO: substituir os textos abaixo pelas suas informações reais.
  */
 export const site = {
-  practitionerName: "Dra. [O seu nome]",
-  role: "Psicóloga Clínica",
+  practitionerName: "Rita Onofre",
+  role: "Mestre em Psicologia Clínica",
   shortIntro:
-    "Acompanho adultos e jovens num espaço seguro e confidencial, ajudando a encontrar equilíbrio, clareza e bem-estar emocional.",
-  email: "contacto@exemplo.pt",
-  phone: "+351 900 000 000",
+    "Acompanho pessoas em contextos de vulnerabilidade e exigência, unindo rigor académico, experiência prática e empatia para promover resiliência e bem-estar psicológico.",
+  email: "ritaonofre.psi@gmail.com",
+  phone: "", // opcional — deixe vazio para não mostrar
   city: "Lisboa",
   modalities: "Consultas presenciais e online",
-} as const;
+};

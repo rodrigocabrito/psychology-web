@@ -17,12 +17,14 @@ export function SiteFooter() {
           >
             {site.email}
           </a>
-          <a
-            href={`tel:${site.phone.replace(/\s/g, "")}`}
-            className="transition-colors hover:text-ink"
-          >
-            {site.phone}
-          </a>
+          {site.phone && (
+            <a
+              href={`tel:${site.phone.replace(/\s/g, "")}`}
+              className="transition-colors hover:text-ink"
+            >
+              {site.phone}
+            </a>
+          )}
         </div>
       </div>
       <div className="border-t border-line/70 py-4 text-center text-xs text-muted">
