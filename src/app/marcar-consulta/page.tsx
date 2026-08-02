@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MarcarConsultaPage() {
-  const { t } = await getDictionary();
+  const { locale, t } = await getDictionary();
 
   return (
     <section className="mx-auto max-w-2xl px-6 py-16 sm:py-20">
@@ -20,7 +20,7 @@ export default async function MarcarConsultaPage() {
       <p className="mt-4 text-lg leading-relaxed text-muted">{t.book.intro}</p>
 
       <div className="mt-10 rounded-3xl border border-line bg-card p-6 sm:p-8">
-        <AppointmentForm t={t.book.form} />
+        <AppointmentForm t={t.book.form} locale={locale} />
       </div>
 
       <p className="mt-6 text-sm text-muted">

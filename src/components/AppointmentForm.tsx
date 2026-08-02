@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { PhonePrefixSelect } from "@/components/PhonePrefixSelect";
 import type { Dictionary } from "@/i18n/dictionaries";
+import type { Locale } from "@/i18n/config";
 
 type FormDict = Dictionary["book"]["form"];
 type Status = "idle" | "submitting" | "success" | "error";
@@ -11,7 +12,13 @@ type Status = "idle" | "submitting" | "success" | "error";
 const inputClass =
   "mt-1 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink outline-none transition-colors focus:border-sage focus:ring-2 focus:ring-sage/30";
 
-export function AppointmentForm({ t }: { t: FormDict }) {
+export function AppointmentForm({
+  t,
+  locale,
+}: {
+  t: FormDict;
+  locale: Locale;
+}) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
 
@@ -111,7 +118,7 @@ export function AppointmentForm({ t }: { t: FormDict }) {
             {t.phone} <span className="text-muted">{t.optional}</span>
           </label>
           <div className="mt-1 flex items-stretch">
-            <PhonePrefixSelect name="phonePrefix" />
+            <PhonePrefixSelect name="phonePrefix" locale={locale} />
             <input
               id="phone"
               name="phone"
