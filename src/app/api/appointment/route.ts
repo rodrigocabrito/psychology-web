@@ -3,14 +3,9 @@ import { Resend } from "resend";
 import { FieldValue } from "firebase-admin/firestore";
 import { appointmentSchema } from "@/lib/schema";
 import { getDb } from "@/lib/firebaseAdmin";
+import { buildAppointmentEmail } from "@/lib/appointmentEmail";
 
 export const runtime = "nodejs";
-
-const MODALITY_LABELS: Record<string, string> = {
-  presencial: "Presencial",
-  online: "Online",
-  indiferente: "Indiferente",
-};
 
 export async function POST(req: Request) {
   // 1. Parse and validate the request body.
@@ -57,22 +52,14 @@ export async function POST(req: Request) {
   if (resendKey && toEmail) {
     try {
       const resend = new Resend(resendKey);
-      const lines = [
-        `Nome: ${data.name}`,
-        `Email: ${data.email}`,
-        `Telefone: ${data.phone || "—"}`,
-        `Modalidade: ${MODALITY_LABELS[data.modality] ?? data.modality}`,
-        `Preferência de horário: ${data.preferredTime || "—"}`,
-        "",
-        "Mensagem:",
-        data.message || "—",
-      ];
+      const { subject, html, text } = buildAppointmentEmail(data);
       await resend.emails.send({
         from: `Website <${fromEmail}>`,
         to: toEmail,
         replyTo: data.email,
-        subject: `Novo pedido de consulta — ${data.name}`,
-        text: lines.join("\n"),
+        subject,
+        html,
+        text,
       });
       emailed = true;
     } catch (err) {
