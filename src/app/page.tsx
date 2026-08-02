@@ -84,7 +84,10 @@ export default function HomePage() {
       </section>
 
       {/* Sobre mim */}
-      <section id="sobre" className="border-t border-line bg-white/60">
+      <section
+        id="sobre"
+        className="scroll-mt-24 border-t border-line bg-white/60"
+      >
         <div className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
           <h2 className="font-serif text-3xl text-ink">Sobre mim</h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted">
@@ -120,7 +123,10 @@ export default function HomePage() {
       </section>
 
       {/* Áreas de intervenção */}
-      <section className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+      <section
+        id="areas"
+        className="mx-auto max-w-5xl scroll-mt-24 px-6 py-16 sm:py-20"
+      >
         <h2 className="font-serif text-3xl text-ink">Áreas de intervenção</h2>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {areas.map((area) => (
@@ -136,7 +142,10 @@ export default function HomePage() {
       </section>
 
       {/* Como funciona */}
-      <section className="border-t border-line bg-white/60">
+      <section
+        id="como-funciona"
+        className="scroll-mt-24 border-t border-line bg-white/60"
+      >
         <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
           <h2 className="font-serif text-3xl text-ink">Como funciona</h2>
           <div className="mt-8 grid gap-8 sm:grid-cols-3">

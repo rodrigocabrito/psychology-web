@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/config/site";
+import { MainNav } from "@/components/MainNav";
 
 export function SiteHeader() {
   return (
@@ -11,20 +12,15 @@ export function SiteHeader() {
         >
           {site.practitionerName}
         </Link>
-        <nav className="flex items-center gap-4 text-sm sm:gap-6">
-          <Link
-            href="/"
-            className="text-muted transition-colors hover:text-ink"
-          >
-            Sobre mim
-          </Link>
+        <div className="flex items-center gap-4 sm:gap-6">
+          <MainNav />
           <Link
             href="/marcar-consulta"
-            className="rounded-full bg-sage px-4 py-2 font-medium text-white transition-colors hover:bg-sage-dark"
+            className="rounded-full bg-sage px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sage-dark"
           >
             Marcar consulta
           </Link>
-        </nav>
+        </div>
       </div>
     </header>
   );

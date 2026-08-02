@@ -5,6 +5,10 @@
   --foreground: #3b3730;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
