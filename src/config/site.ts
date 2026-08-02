@@ -8,7 +8,7 @@ export const site = {
   shortIntro:
     "Acompanho pessoas em contextos de vulnerabilidade e exigência, unindo experiência prática e empatia para promover resiliência e bem-estar psicológico.",
   email: "ritaonofre.psi@gmail.com",
-  phone: "", // opcional — deixe vazio para não mostrar
+  phone: "+351 961 969 574", // opcional — deixe vazio para não mostrar
   city: "Lisboa",
   modalities: "Consultas online",
 };

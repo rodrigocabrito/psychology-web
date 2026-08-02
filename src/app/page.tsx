@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { site } from "@/config/site";
 
 const areas = [
@@ -88,13 +89,16 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Photo placeholder — TODO: substituir por uma fotografia sua */}
+          {/* Fotografia */}
           <div className="relative mx-auto aspect-[4/5] w-full max-w-xs overflow-hidden rounded-3xl border border-line bg-sage-soft">
-            <div className="flex h-full w-full items-center justify-center p-6 text-center">
-              <span className="font-serif text-lg text-sage-dark">
-                A sua fotografia
-              </span>
-            </div>
+            <Image
+              src="/rita.png"
+              alt={`Fotografia de ${site.practitionerName}`}
+              fill
+              sizes="(max-width: 768px) 80vw, 320px"
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
       </section>
