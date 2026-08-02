@@ -1,16 +1,43 @@
 import Link from "next/link";
 import { site } from "@/config/site";
 
-const clinicalAreas = [
-  "Ansiedade e stress",
-  "Depressão",
-  "Burnout",
-  "Dificuldades emocionais",
-  "Autoestima",
-  "Dificuldades relacionais",
-  "Desenvolvimento pessoal",
-  "Luto",
-  "Trauma",
+const areas = [
+  {
+    title: "Ansiedade e stress",
+    text: "Estratégias para compreender e gerir a preocupação, a tensão e o cansaço do dia a dia.",
+  },
+  {
+    title: "Depressão",
+    text: "Apoio para recuperar energia, sentido e prazer nas atividades do quotidiano.",
+  },
+  {
+    title: "Burnout",
+    text: "Acompanhamento na exaustão associada ao trabalho, ajudando a restabelecer o equilíbrio.",
+  },
+  {
+    title: "Dificuldades emocionais e relacionais",
+    text: "Espaço para reconhecer e regular as emoções mais difíceis e para melhorar a comunicação, os limites e as relações interpessoais e familiares.",
+  },
+  {
+    title: "Autoestima",
+    text: "Trabalho de autoconhecimento e reforço de uma autoestima mais saudável e estável.",
+  },
+  {
+    title: "Desenvolvimento pessoal",
+    text: "Um caminho de autoconhecimento e crescimento, ao seu ritmo e de acordo com os seus objetivos.",
+  },
+  {
+    title: "Luto",
+    text: "Um espaço para viver e integrar a perda, ao seu próprio ritmo e sem julgamentos.",
+  },
+  {
+    title: "Trauma",
+    text: "Acompanhamento na elaboração de experiências difíceis, promovendo segurança e recuperação.",
+  },
+  {
+    title: "Psicologia do Desporto",
+    text: "Apoio a atletas na gestão da ansiedade competitiva, confiança, motivação, foco, gestão emocional e recuperação de lesão.",
+  },
 ];
 
 // TODO: substituir pelos passos reais do seu processo de acompanhamento.
@@ -113,23 +140,16 @@ export default function HomePage() {
         className="mx-auto max-w-5xl scroll-mt-24 px-6 py-16 sm:py-20"
       >
         <h2 className="font-serif text-3xl text-ink">Áreas de intervenção</h2>
-        <p className="mt-4 max-w-2xl text-muted">Intervenho em áreas como:</p>
-        <ul className="mt-6 flex flex-wrap gap-3">
-          {clinicalAreas.map((area) => (
-            <li
-              key={area}
-              className="rounded-full border border-line bg-card px-4 py-2 text-sm text-ink"
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {areas.map((area) => (
+            <div
+              key={area.title}
+              className="rounded-2xl border border-line bg-card p-6"
             >
-              {area}
-            </li>
+              <h3 className="font-serif text-xl text-ink">{area.title}</h3>
+              <p className="mt-3 text-muted">{area.text}</p>
+            </div>
           ))}
-        </ul>
-        <div className="mt-6 rounded-2xl border border-sage/30 bg-sage-soft p-6">
-          <h3 className="font-serif text-xl text-ink">Psicologia do Desporto</h3>
-          <p className="mt-2 text-muted">
-            Gestão da ansiedade competitiva, confiança, motivação, foco, gestão
-            emocional e recuperação de lesão.
-          </p>
         </div>
       </section>
 
