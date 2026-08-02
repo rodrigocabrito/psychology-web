@@ -1,27 +1,16 @@
 import Link from "next/link";
 import { site } from "@/config/site";
 
-const areas = [
-  {
-    title: "Psicologia Clínica",
-    text: "Acompanhamento psicológico em diferentes fases da vida, com escuta, respeito e colaboração.",
-  },
-  {
-    title: "Psicologia do Desporto",
-    text: "Apoio a atletas na gestão emocional, na motivação e no desempenho sob pressão.",
-  },
-  {
-    title: "Intervenção no Luto",
-    text: "Um espaço para viver e integrar a perda, ao seu próprio ritmo e sem julgamentos.",
-  },
-  {
-    title: "PHDA",
-    text: "Avaliação e intervenção na Perturbação de Hiperatividade e Défice de Atenção, na infância e na idade adulta.",
-  },
-  {
-    title: "Perturbação do Espetro do Autismo",
-    text: "Avaliação e apoio a pessoas no espetro do autismo e às suas famílias.",
-  },
+const clinicalAreas = [
+  "Ansiedade e stress",
+  "Depressão",
+  "Burnout",
+  "Dificuldades emocionais",
+  "Autoestima",
+  "Dificuldades relacionais",
+  "Desenvolvimento pessoal",
+  "Luto",
+  "Trauma",
 ];
 
 // TODO: substituir pelos passos reais do seu processo de acompanhamento.
@@ -92,31 +81,27 @@ export default function HomePage() {
           <h2 className="font-serif text-3xl text-ink">Sobre mim</h2>
           <div className="mt-6 space-y-4 text-lg leading-relaxed text-muted">
             <p>
-              Sou {site.practitionerName} e concluí o Mestrado em Psicologia
-              Clínica na Universidade Lusíada de Lisboa. Interesso-me
-              particularmente por psicologia clínica, intervenção em crise,
-              psicologia do desporto e saúde mental, e procuro dedicar a minha
-              carreira a apoiar pessoas em contextos de vulnerabilidade e
-              exigência — promovendo resiliência, bem-estar psicológico e
-              estratégias de adaptação eficazes.
+              Realizo acompanhamento psicológico a crianças, adolescentes e
+              adultos, proporcionando um espaço seguro, empático e livre de
+              julgamentos, onde cada pessoa se pode sentir ouvida e compreendida.
             </p>
             <p>
-              Ao longo de mais de 15 anos como atleta de alta competição em
-              natação, desenvolvi disciplina, resiliência, gestão emocional e
-              desempenho sob pressão. São competências que trago para a prática
-              psicológica e para o acompanhamento em contextos académicos e
-              profissionais.
+              A minha intervenção baseia-se na Terapia Cognitivo-Comportamental
+              (TCC), uma abordagem cientificamente validada que procura
+              compreender a relação entre pensamentos, emoções e comportamentos,
+              promovendo estratégias práticas para lidar com os desafios do dia a
+              dia e melhorar o bem-estar psicológico.
             </p>
             <p>
-              Tenho experiência em avaliação psicológica, entrevistas clínicas,
-              elaboração de relatórios e investigação científica, e participo
-              regularmente em workshops e congressos para garantir o
-              desenvolvimento contínuo das minhas competências clínicas.
+              Paralelamente, desenvolvo intervenção na área da Psicologia do
+              Desporto, apoiando atletas na gestão das exigências psicológicas
+              associadas à prática desportiva, com foco no desenvolvimento de
+              competências que potenciem o bem-estar e o rendimento.
             </p>
             <p>
-              Comprometo-me a unir rigor académico, experiência prática e
-              empatia, contribuindo para o crescimento e o bem-estar de cada
-              pessoa que acompanho.
+              O acompanhamento é personalizado e construído em conjunto,
+              respeitando a singularidade de cada pessoa e os seus objetivos,
+              necessidades e expectativas.
             </p>
           </div>
         </div>
@@ -128,16 +113,23 @@ export default function HomePage() {
         className="mx-auto max-w-5xl scroll-mt-24 px-6 py-16 sm:py-20"
       >
         <h2 className="font-serif text-3xl text-ink">Áreas de intervenção</h2>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {areas.map((area) => (
-            <div
-              key={area.title}
-              className="rounded-2xl border border-line bg-card p-6"
+        <p className="mt-4 max-w-2xl text-muted">Intervenho em áreas como:</p>
+        <ul className="mt-6 flex flex-wrap gap-3">
+          {clinicalAreas.map((area) => (
+            <li
+              key={area}
+              className="rounded-full border border-line bg-card px-4 py-2 text-sm text-ink"
             >
-              <h3 className="font-serif text-xl text-ink">{area.title}</h3>
-              <p className="mt-3 text-muted">{area.text}</p>
-            </div>
+              {area}
+            </li>
           ))}
+        </ul>
+        <div className="mt-6 rounded-2xl border border-sage/30 bg-sage-soft p-6">
+          <h3 className="font-serif text-xl text-ink">Psicologia do Desporto</h3>
+          <p className="mt-2 text-muted">
+            Gestão da ansiedade competitiva, confiança, motivação, foco, gestão
+            emocional e recuperação de lesão.
+          </p>
         </div>
       </section>
 
