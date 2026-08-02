@@ -145,7 +145,9 @@ export default function HomePage() {
       >
         <h2 className="font-serif text-3xl text-ink">Áreas de intervenção</h2>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {areas.map((area) => (
+          {[...areas]
+            .sort((a, b) => a.title.localeCompare(b.title, "pt"))
+            .map((area) => (
             <div
               key={area.title}
               className="rounded-2xl border border-line bg-card p-6"
