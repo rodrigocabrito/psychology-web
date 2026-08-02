@@ -124,7 +124,7 @@ export function buildAppointmentEmail(data: AppointmentEmailData) {
                   ${rows}
                   ${messageBlock}
                 </table>
-                <div style="margin-top:28px;">
+                <div style="margin-top:28px;text-align:center;">
                   <a href="mailto:${encodeURIComponent(
                     data.email,
                   )}?subject=${replySubject}" style="display:inline-block;background:#6f8a6b;color:#ffffff;text-decoration:none;font-weight:600;font-size:15px;padding:13px 24px;border-radius:999px;">Responder a ${escapeHtml(
