@@ -34,8 +34,7 @@ export async function POST(req: Request) {
         name: data.name,
         email: data.email,
         phone: data.phone ?? "",
-        modality: data.modality,
-        preferredTime: data.preferredTime ?? "",
+        periods: data.periods ?? [],
         message: data.message ?? "",
         createdAt: FieldValue.serverTimestamp(),
       });

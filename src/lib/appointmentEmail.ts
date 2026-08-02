@@ -1,17 +1,16 @@
 import { site } from "@/config/site";
 
-const MODALITY_LABELS: Record<string, string> = {
-  presencial: "Presencial",
-  online: "Online",
-  indiferente: "Indiferente",
+const PERIOD_LABELS: Record<string, string> = {
+  manha: "Manhã",
+  tarde: "Tarde",
+  noite: "Noite",
 };
 
 export type AppointmentEmailData = {
   name: string;
   email: string;
   phone?: string;
-  modality: string;
-  preferredTime?: string;
+  periods?: string[];
   message?: string;
 };
 
@@ -37,8 +36,10 @@ function detailRow(label: string, valueHtml: string): string {
  * practitioner when someone requests an appointment.
  */
 export function buildAppointmentEmail(data: AppointmentEmailData) {
-  const modality = MODALITY_LABELS[data.modality] ?? data.modality;
   const firstName = data.name.split(" ")[0] || data.name;
+  const periodsLabel = (data.periods ?? [])
+    .map((p) => PERIOD_LABELS[p] ?? p)
+    .join(", ");
   const dateStr = new Intl.DateTimeFormat("pt-PT", {
     dateStyle: "long",
     timeStyle: "short",
@@ -54,8 +55,7 @@ export function buildAppointmentEmail(data: AppointmentEmailData) {
     `Nome: ${data.name}`,
     `Email: ${data.email}`,
     `Telefone: ${data.phone || "—"}`,
-    `Modalidade: ${modality}`,
-    `Preferência de horário: ${data.preferredTime || "—"}`,
+    `Preferência de horário: ${periodsLabel || "—"}`,
     ``,
     `Mensagem:`,
     data.message || "—",
@@ -74,9 +74,8 @@ export function buildAppointmentEmail(data: AppointmentEmailData) {
           `<a href="tel:${escapeHtml(data.phone.replace(/\s/g, ""))}" style="color:#566e53;text-decoration:none;">${escapeHtml(data.phone)}</a>`,
         )
       : "",
-    detailRow("Modalidade", escapeHtml(modality)),
-    data.preferredTime
-      ? detailRow("Preferência de horário", escapeHtml(data.preferredTime))
+    periodsLabel
+      ? detailRow("Preferência de horário", escapeHtml(periodsLabel))
       : "",
   ].join("");
 

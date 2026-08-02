@@ -2,11 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { PhonePrefixSelect } from "@/components/PhonePrefixSelect";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
   "mt-1 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink outline-none transition-colors focus:border-sage focus:ring-2 focus:ring-sage/30";
+
+const PERIOD_OPTIONS = [
+  { value: "manha", label: "Manhã" },
+  { value: "tarde", label: "Tarde" },
+  { value: "noite", label: "Noite" },
+];
 
 export function AppointmentForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -19,12 +26,14 @@ export function AppointmentForm() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+
+    const numberRaw = String(formData.get("phone") ?? "").trim();
+    const prefix = String(formData.get("phonePrefix") ?? "");
     const payload = {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
-      phone: String(formData.get("phone") ?? ""),
-      modality: String(formData.get("modality") ?? "indiferente"),
-      preferredTime: String(formData.get("preferredTime") ?? ""),
+      phone: numberRaw ? `${prefix} ${numberRaw}` : "",
+      periods: formData.getAll("periods").map(String),
       message: String(formData.get("message") ?? ""),
       consent: formData.get("consent") === "on",
     };
@@ -107,49 +116,40 @@ export function AppointmentForm() {
           <label htmlFor="phone" className="text-sm font-medium text-ink">
             Telefone <span className="text-muted">(opcional)</span>
           </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            maxLength={30}
-            autoComplete="tel"
-            className={inputClass}
-          />
+          <div className="mt-1 flex items-stretch">
+            <PhonePrefixSelect name="phonePrefix" />
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputMode="tel"
+              maxLength={30}
+              autoComplete="tel-national"
+              className="w-full rounded-r-xl border border-line bg-white px-4 py-2.5 text-ink outline-none transition-colors focus:border-sage focus:ring-2 focus:ring-sage/30"
+            />
+          </div>
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label htmlFor="modality" className="text-sm font-medium text-ink">
-            Modalidade
-          </label>
-          <select
-            id="modality"
-            name="modality"
-            defaultValue="indiferente"
-            className={inputClass}
-          >
-            <option value="indiferente">Indiferente</option>
-            <option value="presencial">Presencial</option>
-            <option value="online">Online</option>
-          </select>
-        </div>
-        <div>
-          <label
-            htmlFor="preferredTime"
-            className="text-sm font-medium text-ink"
-          >
-            Preferência de horário{" "}
-            <span className="text-muted">(opcional)</span>
-          </label>
-          <input
-            id="preferredTime"
-            name="preferredTime"
-            type="text"
-            maxLength={200}
-            placeholder="Ex.: tardes durante a semana"
-            className={inputClass}
-          />
+      <div>
+        <span className="text-sm font-medium text-ink">
+          Preferência de horário{" "}
+          <span className="text-muted">(opcional)</span>
+        </span>
+        <div className="mt-2 flex flex-wrap gap-3">
+          {PERIOD_OPTIONS.map((p) => (
+            <label key={p.value} className="cursor-pointer">
+              <input
+                type="checkbox"
+                name="periods"
+                value={p.value}
+                className="peer sr-only"
+              />
+              <span className="inline-block rounded-full border border-line bg-white px-5 py-2 text-sm text-ink transition-colors hover:border-sage peer-checked:border-sage peer-checked:bg-sage peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-sage/30">
+                {p.label}
+              </span>
+            </label>
+          ))}
         </div>
       </div>
 
