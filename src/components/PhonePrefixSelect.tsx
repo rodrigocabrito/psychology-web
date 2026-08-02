@@ -45,8 +45,17 @@ const COUNTRIES: Country[] = [
   { code: "CV", dial: "+238", name: "Cabo Verde", Flag: CV },
 ];
 
+// Alphabetical by name, with Portugal pinned first.
+const ORDERED: Country[] = [...COUNTRIES].sort((a, b) =>
+  a.code === "PT"
+    ? -1
+    : b.code === "PT"
+      ? 1
+      : a.name.localeCompare(b.name, "pt"),
+);
+
 export function PhonePrefixSelect({ name }: { name: string }) {
-  const [selected, setSelected] = useState<Country>(COUNTRIES[0]);
+  const [selected, setSelected] = useState<Country>(ORDERED[0]);
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -108,7 +117,7 @@ export function PhonePrefixSelect({ name }: { name: string }) {
           role="listbox"
           className="absolute z-30 mt-2 max-h-64 w-64 overflow-auto rounded-xl border border-line bg-white p-1 shadow-lg"
         >
-          {COUNTRIES.map((country) => {
+          {ORDERED.map((country) => {
             const Flag = country.Flag;
             const isSelected = country.code === selected.code;
             return (

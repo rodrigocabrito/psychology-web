@@ -4,19 +4,23 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const SECTIONS = [
-  { id: "sobre", label: "Sobre mim" },
-  { id: "areas", label: "Áreas de intervenção" },
-  { id: "como-funciona", label: "Como funciona" },
-];
+const SECTION_IDS = ["sobre", "areas", "como-funciona"] as const;
 
-export function MainNav() {
+type NavLabels = { about: string; areas: string; how: string };
+
+export function MainNav({ labels }: { labels: NavLabels }) {
   const pathname = usePathname();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
 
   const navRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+
+  const sections = [
+    { id: "sobre", label: labels.about },
+    { id: "areas", label: labels.areas },
+    { id: "como-funciona", label: labels.how },
+  ];
 
   // On the home page, scroll to the section directly instead of letting Next
   // do a same-page hash navigation (which needed two clicks and duplicated the
@@ -31,7 +35,7 @@ export function MainNav() {
 
   // Scroll-spy: mark the section currently near the top of the viewport.
   useEffect(() => {
-    const hasSections = SECTIONS.some((s) => document.getElementById(s.id));
+    const hasSections = SECTION_IDS.some((id) => document.getElementById(id));
     if (!hasSections) return; // not on the home page
 
     let raf = 0;
@@ -40,16 +44,16 @@ export function MainNav() {
       raf = requestAnimationFrame(() => {
         const threshold = 120; // px from the top (sticky header + margin)
         let current: string | null = null;
-        for (const s of SECTIONS) {
-          const el = document.getElementById(s.id);
-          if (el && el.getBoundingClientRect().top <= threshold) current = s.id;
+        for (const id of SECTION_IDS) {
+          const el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= threshold) current = id;
         }
         // Near the bottom, keep the last section highlighted.
         if (
           window.innerHeight + window.scrollY >=
           document.documentElement.scrollHeight - 4
         ) {
-          current = SECTIONS[SECTIONS.length - 1].id;
+          current = SECTION_IDS[SECTION_IDS.length - 1];
         }
         setActiveId(current);
       });
@@ -95,7 +99,7 @@ export function MainNav() {
 
   return (
     <div ref={navRef} className="relative hidden items-center gap-6 md:flex">
-      {SECTIONS.map((s) => (
+      {sections.map((s) => (
         <Link
           key={s.id}
           href={`/#${s.id}`}

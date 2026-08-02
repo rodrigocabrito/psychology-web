@@ -3,21 +3,23 @@
 import { useState } from "react";
 import Link from "next/link";
 import { PhonePrefixSelect } from "@/components/PhonePrefixSelect";
+import type { Dictionary } from "@/i18n/dictionaries";
 
+type FormDict = Dictionary["book"]["form"];
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
   "mt-1 w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink outline-none transition-colors focus:border-sage focus:ring-2 focus:ring-sage/30";
 
-const PERIOD_OPTIONS = [
-  { value: "manha", label: "Manhã" },
-  { value: "tarde", label: "Tarde" },
-  { value: "noite", label: "Noite" },
-];
-
-export function AppointmentForm() {
+export function AppointmentForm({ t }: { t: FormDict }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
+
+  const periodOptions = [
+    { value: "manha", label: t.periodManha },
+    { value: "tarde", label: t.periodTarde },
+    { value: "noite", label: t.periodNoite },
+  ];
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,19 +47,12 @@ export function AppointmentForm() {
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body?.error ?? "Ocorreu um erro.");
-      }
+      if (!res.ok) throw new Error(t.errorFallback);
 
       form.reset();
       setStatus("success");
-    } catch (err) {
-      setErrorMsg(
-        err instanceof Error
-          ? err.message
-          : "Ocorreu um erro. Tente novamente.",
-      );
+    } catch {
+      setErrorMsg(t.errorFallback);
       setStatus("error");
     }
   }
@@ -65,16 +60,15 @@ export function AppointmentForm() {
   if (status === "success") {
     return (
       <div className="rounded-2xl border border-sage/40 bg-sage-soft p-8 text-center">
-        <h2 className="font-serif text-2xl text-sage-dark">Pedido enviado</h2>
-        <p className="mt-3 text-muted">
-          Obrigada pelo seu contacto. Recebi o seu pedido e entrarei em contacto
-          consigo em breve para combinarmos a consulta.
-        </p>
+        <h2 className="font-serif text-2xl text-sage-dark">
+          {t.successHeading}
+        </h2>
+        <p className="mt-3 text-muted">{t.successText}</p>
         <Link
           href="/"
           className="mt-6 inline-block rounded-full border border-sage px-5 py-2.5 font-medium text-sage-dark transition-colors hover:bg-white"
         >
-          Voltar ao início
+          {t.back}
         </Link>
       </div>
     );
@@ -84,7 +78,7 @@ export function AppointmentForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
         <label htmlFor="name" className="text-sm font-medium text-ink">
-          Nome <span className="text-sage">*</span>
+          {t.name} <span className="text-sage">*</span>
         </label>
         <input
           id="name"
@@ -101,7 +95,7 @@ export function AppointmentForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="email" className="text-sm font-medium text-ink">
-            Email <span className="text-sage">*</span>
+            {t.email} <span className="text-sage">*</span>
           </label>
           <input
             id="email"
@@ -114,7 +108,7 @@ export function AppointmentForm() {
         </div>
         <div>
           <label htmlFor="phone" className="text-sm font-medium text-ink">
-            Telefone <span className="text-muted">(opcional)</span>
+            {t.phone} <span className="text-muted">{t.optional}</span>
           </label>
           <div className="mt-1 flex items-stretch">
             <PhonePrefixSelect name="phonePrefix" />
@@ -133,11 +127,10 @@ export function AppointmentForm() {
 
       <div>
         <span className="text-sm font-medium text-ink">
-          Preferência de horário{" "}
-          <span className="text-muted">(opcional)</span>
+          {t.periodsLabel} <span className="text-muted">{t.optional}</span>
         </span>
         <div className="mt-2 flex flex-wrap gap-3">
-          {PERIOD_OPTIONS.map((p) => (
+          {periodOptions.map((p) => (
             <label key={p.value} className="cursor-pointer">
               <input
                 type="checkbox"
@@ -155,14 +148,14 @@ export function AppointmentForm() {
 
       <div>
         <label htmlFor="message" className="text-sm font-medium text-ink">
-          Mensagem <span className="text-muted">(opcional)</span>
+          {t.message} <span className="text-muted">{t.optional}</span>
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
           maxLength={2000}
-          placeholder="Se quiser, deixe uma breve mensagem sobre o que a/o traz à consulta."
+          placeholder={t.messagePlaceholder}
           className={inputClass}
         />
       </div>
@@ -176,9 +169,7 @@ export function AppointmentForm() {
           className="mt-1 h-4 w-4 shrink-0 rounded border-line text-sage focus:ring-sage/30"
         />
         <label htmlFor="consent" className="text-sm text-muted">
-          Autorizo o tratamento dos meus dados para efeitos de contacto e
-          marcação de consulta. Os dados são confidenciais e não são partilhados
-          com terceiros. <span className="text-sage">*</span>
+          {t.consent} <span className="text-sage">*</span>
         </label>
       </div>
 
@@ -193,7 +184,7 @@ export function AppointmentForm() {
         disabled={status === "submitting"}
         className="w-full rounded-full bg-sage px-6 py-3 font-medium text-white transition-colors hover:bg-sage-dark disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
-        {status === "submitting" ? "A enviar…" : "Enviar pedido"}
+        {status === "submitting" ? t.submitting : t.submit}
       </button>
     </form>
   );

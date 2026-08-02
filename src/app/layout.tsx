@@ -3,7 +3,8 @@ import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { site } from "@/config/site";
+import { LanguagePrompt } from "@/components/LanguagePrompt";
+import { getDictionary, hasLocalePreference } from "@/i18n/server";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,28 +18,35 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: `${site.practitionerName} — ${site.role}`,
-    template: `%s — ${site.practitionerName}`,
-  },
-  description: site.shortIntro,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { t } = await getDictionary();
+  return {
+    title: {
+      default: `${t.name} — ${t.role}`,
+      template: `%s — ${t.name}`,
+    },
+    description: t.metaDescription,
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { locale } = await getDictionary();
+  const showPrompt = !(await hasLocalePreference());
+
   return (
     <html
-      lang="pt"
+      lang={locale}
       className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <LanguagePrompt show={showPrompt} />
       </body>
     </html>
   );
