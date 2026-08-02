@@ -3,7 +3,7 @@
  * Edit these values to update the name, contacts, etc. across the whole site.
  */
 export const site = {
-  practitionerName: "Rita Onofre",
+  practitionerName: "Dra. Rita Onofre",
   role: "Psicóloga Clínica",
   shortIntro:
     "Acompanho pessoas em contextos de vulnerabilidade e exigência, unindo experiência prática e empatia para promover resiliência e bem-estar psicológico.",
