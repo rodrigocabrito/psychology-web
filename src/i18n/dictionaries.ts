@@ -75,18 +75,18 @@ const pt = {
       },
       {
         title: "Sessão inicial",
-        text: "Conhecemo-nos, percebo o que o traz à consulta e definimos objetivos.",
+        text: "Conhecemo-nos, percebo o que te traz à consulta e definimos objetivos.",
       },
       {
         title: "Acompanhamento",
-        text: "Trabalhamos juntos, ao seu ritmo, num processo confidencial e sem julgamentos.",
+        text: "Trabalhamos juntos, ao teu ritmo, num processo confidencial e sem julgamentos.",
       },
     ],
     modalities: "Consultas online.",
   },
   cta: {
     heading: "Pronto para dar o primeiro passo?",
-    text: "Envie um pedido de consulta e entrarei em contacto consigo para combinarmos o melhor momento.",
+    text: "Envia um pedido de consulta e entrarei em contacto contigo para combinarmos o melhor momento.",
     button: "Marcar consulta",
   },
   footer: {
@@ -95,11 +95,11 @@ const pt = {
   book: {
     metaTitle: "Marcar consulta",
     metaDescription:
-      "Envie um pedido de consulta e entrarei em contacto consigo.",
+      "Envia um pedido de consulta e entrarei em contacto contigo.",
     heading: "Marcar consulta",
     intro:
-      "Preencha o formulário abaixo com o seu pedido. Entrarei em contacto consigo, normalmente em 24 a 48 horas, para combinarmos o melhor horário. Consultas online.",
-    urgencyPre: "Em caso de urgência, contacte diretamente através de ",
+      "Preenche o formulário abaixo com o teu pedido. Entrarei em contacto contigo, normalmente em 24 a 48 horas, para combinarmos o melhor horário. Consultas online.",
+    urgencyPre: "Em caso de urgência, contacta diretamente através de ",
     urgencyOr: " ou ",
     form: {
       name: "Nome",
@@ -112,14 +112,14 @@ const pt = {
       periodNoite: "Noite",
       message: "Mensagem",
       messagePlaceholder:
-        "Se quiser, deixe uma breve mensagem sobre o que a/o traz à consulta.",
+        "Se quiseres, deixa uma breve mensagem sobre o que te traz à consulta.",
       consent:
         "Autorizo o tratamento dos meus dados para efeitos de contacto e marcação de consulta. Os dados são confidenciais e não são partilhados com terceiros.",
       submit: "Enviar pedido",
       submitting: "A enviar…",
       successHeading: "Pedido enviado",
       successText:
-        "Obrigada pelo seu contacto. Recebi o seu pedido e entrarei em contacto consigo em breve para combinarmos a consulta.",
+        "Obrigada pelo contacto. Recebi o teu pedido e entrarei em contacto em breve para combinarmos a consulta.",
       back: "Voltar ao início",
       errorFallback: "Ocorreu um erro. Tente novamente.",
     },
