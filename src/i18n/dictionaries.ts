@@ -121,7 +121,7 @@ const pt = {
       successText:
         "Obrigada pelo contacto. Recebi o teu pedido e entrarei em contacto em breve para combinarmos a consulta.",
       back: "Voltar ao início",
-      errorFallback: "Ocorreu um erro. Tente novamente.",
+      errorFallback: "Ocorreu um erro. Tenta novamente.",
     },
   },
 };
